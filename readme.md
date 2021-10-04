@@ -13,14 +13,14 @@ Built in accordance with the MVC with service layer design pattern.
 - The name of the endpoints MUST adhere to the conventions discussed in class. 
 
 **<h3>Assignment 1</h3>**
-1. Customer endpoints
+**1. Customer endpoints**
 - register unique customer
 - retrieves all customers
 - retrieves a specific customer by id
 - update a customer by id
 - delete a customer by id
 
-2. Product endpoints
+**2. Product endpoints**
 - create a product
 - retrieves all products
 - retrieves all product categories in the database
