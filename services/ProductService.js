@@ -1,4 +1,3 @@
-const { db } = require("../models/Product.js");
 const productModel = require("../models/Product.js");
 
 exports.createAProduct = (req, res)=> {
