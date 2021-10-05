@@ -2,73 +2,18 @@ const productModel = require("../models/Product.js");
 
 exports.createAProduct = (req, res)=> {
     const product = new productModel(req.body);
-
-    //validation variables
-    const minLengthName = 5;
-    const maxLengthName = 30;
-
-    //name validations
-    if(product.name == undefined)
-    {
+    product.save()
+    .then((newProduct)=>{
         res.json({
-            message: "Error while creating product. Name is undefinied"
+            message: "The product was successfully created and store in the database"
+            , data: newProduct
         })
-    }
-    else if(product.name.length < `${minLengthName}` || product.name.length > `${maxLengthName}`)
-    {
-        res.json({
-            message: `Product name must be between ${minLengthName} and ${maxLengthName} characters long`
+    })
+    .catch(err=>{
+        res.status(500).json({
+            message: err
         })
-    }
-
-    //price validations
-    else if(product.price == undefined)
-    {
-        res.json({
-            message: "Error while creating product. Price is undefinied"
-        })
-    }
-
-    //category validations
-    else if(product.category == undefined)
-    {
-        res.json({
-            message: "Error while creating product. Category must be specified"
-        })
-    }
-
-    //bestseller flag validations
-    else if(product.isBestseller == undefined)
-    {
-        res.json({
-            message: "Error while creating product. Inform whether is a bestseller"
-        })
-    }
-
-    //source image validations
-    else if(product.srcImg == undefined)
-    {
-        res.json({
-            message: "Error while creating product. Provide a URL"
-        })
-    }
-
-    //all validations passed = create a product
-    else
-    {
-        product.save()
-        .then((newProduct)=>{
-            res.json({
-                message: "The product was successfully created and store in the database"
-                , data: newProduct
-            })
-        })
-        .catch(err=>{
-            res.status(500).json({
-                message: err
-            })
-        })
-    }
+    })
 };
 
 //query best seller

@@ -1,9 +1,10 @@
 const express = require('express')
 const router = express.Router()
 const productService = require("../services/ProductService.js");
+const productMiddleware = require("../middleware/productMiddleware.js");
 
 //Create
-router.post("/", productService.createAProduct) 
+router.post("/", productMiddleware.testName, productMiddleware.testPrice, productMiddleware.testCategory, productMiddleware.testBestseller, productMiddleware.testImg, productService.createAProduct) 
 
 //Read all
 router.get("/", productService.getAllProducts)
