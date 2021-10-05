@@ -1,3 +1,4 @@
+/*
 exports.home = (req, res)=> {
     res.json({
         message: "Home page"
@@ -9,3 +10,4 @@ exports.notFound = (req, res)=> {
         message: "404 Page not found"
     })
 };
+*/

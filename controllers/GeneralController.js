@@ -1,3 +1,4 @@
+/*
 const express = require('express')
 const router = express.Router();
 const generalService = require("../services/GeneralService.js");
@@ -9,3 +10,4 @@ router.get("/", generalService.home);
 router.get("*", generalService.notFound);
 
 module.exports = router
+*/
