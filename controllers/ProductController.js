@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const productService = require("../services/ProductService.js");
 const productMiddleware = require("../middleware/ProductMiddleware.js");
+const generalMiddleware = require("../middleware/generalMiddleware.js");
 
 //Create
 router.post("/", productMiddleware.testName, productMiddleware.testPrice, productMiddleware.testCategory, productMiddleware.testBestseller, productMiddleware.testImg, productService.createAProduct) 
@@ -13,12 +14,12 @@ router.get("/", productService.getAllProducts)
 router.get("/categories", productService.getAllCategories)
 
 //Read one
-router.get("/:id", productService.getAProduct)
+router.get("/:id", generalMiddleware.testId, productService.getAProduct)
 
 //Update
-router.put("/:id", productService.updateAProduct)
+router.put("/:id",  generalMiddleware.testId, productService.updateAProduct)
 
 //Delete
-router.delete("/:id", productService.deleteAProduct)
+router.delete("/:id",  generalMiddleware.testId, productService.deleteAProduct)
 
 module.exports = router
