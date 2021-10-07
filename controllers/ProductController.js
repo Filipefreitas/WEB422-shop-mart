@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const productService = require("../services/ProductService.js");
 const productMiddleware = require("../middleware/ProductMiddleware.js");
-const generalMiddleware = require("../middleware/generalMiddleware.js");
+const generalMiddleware = require("../middleware/GeneralMiddleware.js");
 
 //Create
 router.post("/", productMiddleware.testName, productMiddleware.testPrice, productMiddleware.testCategory, productMiddleware.testBestseller, productMiddleware.testImg, productService.createAProduct) 
