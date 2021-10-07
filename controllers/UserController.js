@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const userService = require("../services/UserService.js");
 const userMiddleware = require("../middleware/UserMiddleware.js");
-const generalMiddleware = require("../middleware/generalMiddleware.js");
+const generalMiddleware = require("../middleware/GeneralMiddleware.js");
 
 //Create
 router.post("/", userMiddleware.testName, userMiddleware.testUniqueUser, userMiddleware.testEmail, userMiddleware.testPassword, userService.createAUser) 
