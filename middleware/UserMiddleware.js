@@ -119,19 +119,3 @@ exports.testPassword = (req, res, next)=>
     }
 
 }
-    
-exports.testId = (req, res, next)=>
-{
-    const userIdLength = '24';
-
-    if(req.params.id.length != userIdLength)
-    {
-        res.json({
-            message: "Error while fetching user. Invalid Id length"
-        })
-    }
-    else
-    {
-        next();
-    }
-}

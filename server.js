@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require('mongoose');
+const cors = require("cors");
 require('dotenv').config({ path: 'config/keys.env' });
 const generalController = require("./controllers/GeneralController.js");
 const userController = require("./controllers/UserController.js");
@@ -7,6 +8,25 @@ const productController = require("./controllers/ProductController.js");
 
 const app = express();
 app.use(express.json());
+
+const corsOptionsDelegate = function (req, callback) 
+{
+    const whitelist =  ['http://localhost:3000', 'http://127.0.0.1:3000']
+    let  corsOptions;
+    if (whitelist.indexOf(req.header('Origin')) !== -1) 
+    {
+        corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
+    } 
+    else 
+    {
+        corsOptions = { origin: false } // disable CORS for this request
+    }
+  callback(null, corsOptions) // callback expects two parameters: error and options
+}
+
+//middleware
+app.use(cors(corsOptionsDelegate))
+
 app.use("/users", userController);
 app.use("/products", productController);
 app.use("/", generalController);

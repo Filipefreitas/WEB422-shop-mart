@@ -28,6 +28,8 @@ exports.testName = (req, res, next)=>
 
 exports.testPrice = (req, res, next)=>
 {
+    const product = new productModel(req.body);
+
     if(product.price == undefined)
     {
         res.json({
@@ -42,7 +44,9 @@ exports.testPrice = (req, res, next)=>
     
 exports.testCategory = (req, res, next)=>
 {
-    if(product.isBestseller == undefined)
+    const product = new productModel(req.body);
+
+    if(product.category == undefined)
     {
         res.json({
             message: "Error while creating product. Inform whether is a bestseller"
@@ -56,7 +60,9 @@ exports.testCategory = (req, res, next)=>
     
 exports.testBestseller = (req, res, next)=>
 {
-    if(product.category == undefined)
+    const product = new productModel(req.body);
+
+    if(product.isBestseller == undefined)
     {
         res.json({
             message: "Error while creating product. Category must be specified"
@@ -70,6 +76,8 @@ exports.testBestseller = (req, res, next)=>
 
 exports.testImg = (req, res, next)=>
 {
+    const product = new productModel(req.body);
+    
     if(product.srcImg == undefined)
     {
         res.json({
