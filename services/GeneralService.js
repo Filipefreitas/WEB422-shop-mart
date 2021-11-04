@@ -5,7 +5,7 @@ exports.home = (req, res)=> {
 }
 
 exports.notFound = (req, res)=> {
-    res.json({
+    res.status(404).json({
         message: "404 Page not found"
     })
 };
