@@ -35,24 +35,6 @@ exports.getAllProducts = (req,res)=>{
             })
         })
     }
-    
-    else if(req.query.isFeatured)
-    {
-        productModel.find()
-        .where("isFeatured").equals(req.query.isFeatured==="yes" ? true : false)
-        .then((products)=>{
-            res.json({
-                message : req.query.isBestseller==="yes" ? `A list of all featured product` : "A List of non-featured products"
-                , data: products
-                , totalProducts: products.length
-            })
-        })
-        .catch(err=>{
-            res.status(500).json({
-                message: err
-            })
-        })
-    }
 
     //query category
     else if(req.query.category)

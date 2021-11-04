@@ -30,11 +30,6 @@ const productSchema = new Schema({
         type: Boolean
         , required: true
     }
-    , isFeatured: 
-    { 
-        type: Boolean
-        , required: true
-    }
     , srcImg: 
     { 
         type: String
