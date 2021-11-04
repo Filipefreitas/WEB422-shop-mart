@@ -5,6 +5,7 @@ require('dotenv').config({ path: 'config/keys.env' });
 const generalController = require("./controllers/GeneralController.js");
 const userController = require("./controllers/UserController.js");
 const productController = require("./controllers/ProductController.js");
+const imageController = require("./controllers/ImageController.js");
 
 const app = express();
 app.use(express.json());
@@ -29,6 +30,7 @@ app.use(cors(corsOptionsDelegate))
 
 app.use("/users", userController);
 app.use("/products", productController);
+app.use("/images", imageController);
 app.use("/", generalController);
 
 app.listen(process.env.PORT,()=>{
