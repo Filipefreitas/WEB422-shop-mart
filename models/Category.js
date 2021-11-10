@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
-const imageSchema = new Schema({
+const categorySchema = new Schema({
     categoryName: 
     { 
         type: String 
@@ -19,6 +19,6 @@ const imageSchema = new Schema({
     }
 });
 
-const Image = mongoose.model('Image', imageSchema);
+const Category = mongoose.model('Category', categorySchema);
 
-module.exports = Image;
+module.exports = Category;

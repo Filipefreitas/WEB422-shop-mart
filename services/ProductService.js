@@ -1,4 +1,5 @@
 const productModel = require("../models/Product.js");
+const categoryModel = require("../models/Category.js");
 
 exports.createAProduct = (req, res)=> {
     const product = new productModel(req.body);
@@ -16,12 +17,14 @@ exports.createAProduct = (req, res)=> {
     })
 };
 
-//query best seller
-exports.getAllProducts = (req,res)=>{
+//get products
+exports.getAllProducts = async (req,res)=>{
+
+    //query best seller
     if(req.query.isBestseller)
     {
-        productModel.find()
-        .where("isBestseller").equals(req.query.isBestseller==="yes" ? true : false)
+        await productModel.find()
+        .where("isBestseller").equals(req.query.isBestseller==="yes" ? true : false).populate("category", "-dateCreated")
         .then((products)=>{
             res.json({
                 message : req.query.isBestseller==="yes" ? `A list of all best-seller product` : "A List of non-best-seller products"
@@ -39,7 +42,7 @@ exports.getAllProducts = (req,res)=>{
     else if(req.query.isFeatured)
     {
         productModel.find()
-        .where("isFeatured").equals(req.query.isFeatured==="yes" ? true : false)
+        .where("isFeatured").equals(req.query.isFeatured==="yes" ? true : false).populate("category", "-dateCreated")
         .then((products)=>{
             res.json({
                 message : req.query.isBestseller==="yes" ? `A list of all featured product` : "A List of non-featured products"
@@ -58,7 +61,7 @@ exports.getAllProducts = (req,res)=>{
     else if(req.query.category)
     {
         productModel.find()
-        .where("category").equals(req.query.category)
+        .where("category").equals(req.query.category).populate("category", "-dateCreated")
         .then((products)=>{
             res.json({
                 message: `A list of all products with the category ${req.query.category}`
@@ -75,7 +78,7 @@ exports.getAllProducts = (req,res)=>{
 
     else
     {
-        productModel.find()
+        productModel.find().populate("category", "-dateCreated")
         .then(products=>{
             res.json({
                 message: "A list of all products"
@@ -92,8 +95,8 @@ exports.getAllProducts = (req,res)=>{
     }
 };
 
-exports.getAProduct = (req,res)=>{
-    productModel.findById(req.params.id)
+exports.getAProduct = async (req,res)=>{
+    await productModel.findById(req.params.id).populate("category", "-dateCreated")
     .then(product=>{
         if(product)
         {
@@ -116,14 +119,24 @@ exports.getAProduct = (req,res)=>{
     })
 };
 
-//retrive list of all product categories in the database
-exports.getAllCategories = (req,res)=>{
-    productModel.find().distinct("category", function(err, categories){
+//populate categories
+exports.getAllCategoryObjects = async (req,res)=>{
+    const populatedCategories = await productModel.find({})
+        .populate("category", "-dateCreated")
+        
+        //extracts category object popualted from each document
+        const extractCategories = populatedCategories.map(category => category.category);
+
+        const categories = [...new Map(extractCategories.map(item =>
+            [item['_id'], item])).values()];
+          
+        //res.send(categories);
+
         res.json({
-            message: `list of all categories`
+            message: "A list of categories objects that has at least one product in the inventory"
             , data: categories
+            , totalCategories: categories.length
         })
-    })    
 };
 
 exports.updateAProduct = (req,res)=>{

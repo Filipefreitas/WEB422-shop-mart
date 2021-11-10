@@ -1,8 +1,8 @@
 const express = require('express')
 const router = express.Router();
-const imageService = require("../services/ImageService.js");
+const categoryService = require("../services/CategoryService.js");
 
 //Route to all image categories stored in mongoDb
-router.get("/", imageService.getAllImgCategories);
+router.get("/", categoryService.getAllCategories);
 
 module.exports = router

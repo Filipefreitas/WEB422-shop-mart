@@ -4,7 +4,7 @@ exports.testId = (req, res, next)=>
 
     if(req.params.id.length != idLength)
     {
-        res.json({
+        res.status(500).json({
             message: "Error while fetching data. Invalid Id length"
         })
     }

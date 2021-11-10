@@ -1,10 +1,10 @@
-const imageModel = require("../models/Image.js");
+const categoryModel = require("../models/Category.js");
 
-exports.getAllImgCategories = (req,res)=>{
-    imageModel.find()
+exports.getAllCategories = (req,res)=>{
+    categoryModel.find()
     .then(images=>{
         res.json({
-            message: "A list of all images"
+            message: "A list of all categories"
             , data: images
             , totalImages: images.length
         })

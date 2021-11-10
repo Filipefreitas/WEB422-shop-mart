@@ -5,13 +5,13 @@ const productMiddleware = require("../middleware/ProductMiddleware.js");
 const generalMiddleware = require("../middleware/GeneralMiddleware.js");
 
 //Create
-router.post("/", productMiddleware.testName, productMiddleware.testPrice, productMiddleware.testCategory, productMiddleware.testBestseller, productMiddleware.testImg, productService.createAProduct) 
+router.post("/", productMiddleware.validateProduct, productService.createAProduct) 
 
 //Read all
 router.get("/", productService.getAllProducts)
 
 //Read categories
-router.get("/categories", productService.getAllCategories)
+router.get("/categories", productService.getAllCategoryObjects)
 
 //Read one
 router.get("/:id", generalMiddleware.testId, productService.getAProduct)

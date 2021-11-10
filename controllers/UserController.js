@@ -5,7 +5,7 @@ const userMiddleware = require("../middleware/UserMiddleware.js");
 const generalMiddleware = require("../middleware/GeneralMiddleware.js");
 
 //Create
-router.post("/", userMiddleware.testName, userMiddleware.testUniqueUser, userMiddleware.testEmail, userMiddleware.testPassword, userService.createAUser) 
+router.post("/", userMiddleware.validateUser, userService.createAUser) 
 
 //Read all
 router.get("/", userService.getUsers)
