@@ -18,12 +18,12 @@ exports.createAProduct = (req, res)=> {
 };
 
 //get products
-exports.getAllProducts = async (req,res)=>{
+exports.getAllProducts = (req,res)=>{
 
     //query best seller
     if(req.query.isBestseller)
     {
-        await productModel.find()
+        productModel.find()
         .where("isBestseller").equals(req.query.isBestseller==="yes" ? true : false).populate("category", "-dateCreated")
         .then((products)=>{
             res.json({
@@ -95,8 +95,8 @@ exports.getAllProducts = async (req,res)=>{
     }
 };
 
-exports.getAProduct = async (req,res)=>{
-    await productModel.findById(req.params.id).populate("category", "-dateCreated")
+exports.getAProduct = (req,res)=>{
+    productModel.findById(req.params.id).populate("category", "-dateCreated")
     .then(product=>{
         if(product)
         {
