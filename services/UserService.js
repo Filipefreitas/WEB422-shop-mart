@@ -6,7 +6,7 @@ exports.createAUser = (req, res)=> {
     user.save()
     .then((newUser)=>{
         res.json({
-            message: "The user was successfully created and store in the database"
+            message: "User successfully created"
             , data: newUser
         })
     })
